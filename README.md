@@ -1,7 +1,7 @@
 # Celo-TicketVerse
 "The Ticket Verse" is a simple Web3 market place inspired by the celo development 101 challenge. The basic concept of the DAPP is to bring together event organizers to sell their event tickets in a decentralized manner, and also provide ticket holders a way to make money by allowing them to re-list or resell their tickets for a higher price on the market place. Transactions are carried out with the celo dollar (cUSD)
 # Features Of The Dapp
-1.) Users Can Connect To the DAPP with their CELO wallet.
+1.) Users Can Connect To the DAPP with their CELO wallet.<br/>
 2.) Total number of available tickets are displayed.
 3.) Total number of tickets sold are displayed to inform potential buyers of how many is left.
 4.) The creator of an event is not allowed to purchase their event tickets.
