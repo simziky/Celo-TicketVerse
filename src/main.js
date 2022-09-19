@@ -5,7 +5,7 @@ import marketplaceAbi from '../contract/marketplace.abi.json'
 import erc20Abi from "../contract/erc20.abi.json"
 
 const ERC20_DECIMALS = 18  //for wei or gwei
-const MPContractAddress = "0x5f8cD313bcB06df94A2078778a3Efc48e31d0326"   // contract address for the Ticket Verse
+const MPContractAddress = "0x2696fcbC1aA4640ea58CCd861166396A9659C34E"  //"0x5f8cD313bcB06df94A2078778a3Efc48e31d0326"   // contract address for the Ticket Verse
 const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1" // contract address for the cUSD Token 
 
 let kit
@@ -48,7 +48,7 @@ const connectCeloWallet = async function () {
 
   /*************************** Renders The Ticket Array After Info Has Been Pushed Into It **********************************************************/
   const getTickets = async function() {
-    const _ticketLength = await contract.methods.getTicketLength().call()
+    const _ticketLength = await contract.methods.getTicketsLength().call()
     const _tickets = []
     for (let i = 0; i < _ticketLength; i++) {
         let _ticket = new Promise(async (resolve, reject) => {
@@ -63,12 +63,13 @@ const connectCeloWallet = async function () {
             quantity: new BigNumber(p[5]),
             sold: p[6],
             price: new BigNumber(p[7]),
-            bought: p[8]
-           
+            soldOut: p[8]
           })
+          
         })
         _tickets.push(_ticket)
       }
+     
       tickets = await Promise.all(_tickets)
       renderTickets()
     }
@@ -85,14 +86,15 @@ const connectCeloWallet = async function () {
 
 
     /*************************** Template Where The Added Tickets Will Be Displayed **********************************************************/
-
+    
     function productTemplate(_ticket) {
+      
       return `
         <div class="card mb-4">
           <img class="card-img-top" src="${_ticket.image}" alt="...">
           <div class="position-absolute top-0 end-0 ">
             <div class = "bg-warning mt-4 px-2 py-1 rounded-start">
-            ${_ticket.quantity.shiftedBy(-ERC20_DECIMALS).toFixed(0)} tickets
+            ${_ticket.quantity} tickets
             </div>
   
             <div class = "bg-warning mt-4 px-2 py-1 rounded-start">
@@ -114,18 +116,24 @@ const connectCeloWallet = async function () {
             <span>${_ticket.location}</span>
           </p>
 
-          ${_ticket.owner === kit.defaultAccount ?`<div class="d-grid gap-2">
-          <a class="btn btn-lg btn-outline-dark resellBtn fs-6 p-3"  id=${_ticket.index} >
-            Resell 
-          </a>
+          ${(_ticket.owner === kit.defaultAccount) ? `<div class="d-grid gap-2">
+          <button type = "button" class= "btn btn-secondary buyBtn btn-lg" id=${_ticket.index} disabled>
+          Buy for ${_ticket.price.shiftedBy(-ERC20_DECIMALS).toFixed(2)} cUSD
+          </button>
         </div>`
+        :
+        _ticket.soldOut === true ? `<div class="d-grid gap-2">
+      <button type = "button" class="btn btn-lg btn-outline-dark resellBtn fs-6 p-3"  id=${_ticket.index} disabled>
+        Sold Out
+      </button>
+    </div>`
          :
             `<div class="d-grid gap-2">
-                <a class="btn btn-lg btn-outline-success buyBtn fs-6 p-3" id=${
+                <button type = "button" class="btn btn-lg btn-outline-success buyBtn fs-6 p-3" id=${
                   _ticket.index
                 }>
                   Buy for ${_ticket.price.shiftedBy(-ERC20_DECIMALS).toFixed(2)} cUSD
-                </a>
+                </button>
               </div>`
           }
         </div>
@@ -152,7 +160,7 @@ const connectCeloWallet = async function () {
       document.getElementById("newEventDescription").value,
       document.getElementById("newLocation").value,
       new BigNumber(document.getElementById("newQuantity").value)
-      .shiftedBy(ERC20_DECIMALS)
+      .toFixed()
       .toString(),
       new BigNumber(document.getElementById("newPrice").value)
       .shiftedBy(ERC20_DECIMALS)
