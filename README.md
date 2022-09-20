@@ -12,3 +12,12 @@
 To see the new price of the ticket after reselling you should connect to the DAPP with a different account.
 # DAPP Link
 https://simziky.github.io/Celo-TicketVerse/
+
+# How To Use
+a) Make sure you have the celo wallet extension plugin available on your browser,<br/>
+  you can download it here https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en <br/>
+  
+b) Transactions will be done using cUSD on the Alfajores testnet.<br/>
+  Get faucet here(testnet money) https://celo.org/developers/faucet<br/>
+  
+    That is all, you can now connect to the DAPP and add your tickets or buy the one you are interested in.
