@@ -5,7 +5,7 @@ import marketplaceAbi from '../contract/marketplace.abi.json'
 import erc20Abi from "../contract/erc20.abi.json"
 
 const ERC20_DECIMALS = 18  //for wei or gwei
-const MPContractAddress = "0xEE628dC4931c354909DfAE146dB9F950B080DCaF"  //"0x5f8cD313bcB06df94A2078778a3Efc48e31d0326"   // contract address for the Ticket Verse
+const MPContractAddress = "0xaCbD8c7177a211480A5E25A9904e4a68e787E4d3"   // contract address for the Ticket Verse
 const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1" // contract address for the cUSD Token 
 
 let kit
