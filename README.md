@@ -20,4 +20,4 @@ a) Make sure you have the celo wallet extension plugin available on your browser
 b) Transactions will be done using cUSD on the Alfajores testnet.<br/>
   Get faucet here(testnet money) https://celo.org/developers/faucet<br/>
   
-    That is all, you can now connect to the DAPP and add your tickets or buy the one you are interested in.
+   That is all, you can now connect to the DAPP and add your tickets or buy the one you are interested in.
